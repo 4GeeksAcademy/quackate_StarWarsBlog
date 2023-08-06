@@ -1,0 +1,26 @@
+.main-wrapper {
+    margin: 50px;
+    margin-left: 90px;
+    margin-right: 90px;
+}
+
+.title {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: solid;
+    border-color: rgb(45, 45, 45);
+    padding-bottom: 7px;
+    margin-bottom: 25px;
+}
+
+/*.h-scrollbar {
+    overflow-x: scroll;
+    width: 100%;
+}
+
+.h-scrollbar div {
+    width: 260px;
+
+}
+This is what I had inside of the div className: h-scrollbar justify-content-between
+*/

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "../../styles/home.css";
 
 import { Context } from "../store/appContext";
@@ -7,7 +7,7 @@ import { CharacterCard } from "../component/charac-card.js";
 import { VehicleCard } from "../component/vehicle-card";
 import { PlanetCard } from "../component/planet-card";
 
-export const Home = () => {
+export const Home = (props) => {
 	const { store, actions } = useContext(Context);
 
 	return (

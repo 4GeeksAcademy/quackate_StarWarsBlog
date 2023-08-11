@@ -18,7 +18,7 @@ export const VehicleCard = (props) => {
                     <Link to={"vehicleDetails/" + props.index}>
                         <button type="button" className="btn btn-outline-secondary">Learn More!</button>
                     </Link>
-                        <button onClick={() => actions.addFavorite(props.name)} type="button" className="btn btn-outline-light heart-button"><i className="far fa-heart"></i></button>
+                        <button onClick={() => {!store.favorites.includes(props.name)? actions.addFavorite(props.name) : ""}} type="button" className={`btn heart-button ${store.favorites.includes(props.name)? "btn-light" : "btn-outline-light"}`}><i className="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>

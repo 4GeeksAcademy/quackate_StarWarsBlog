@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
 
@@ -7,9 +7,11 @@ import { Context } from "../store/appContext";
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
-	useEffect(() => {
-		actions.deleteFavorite();
-	}, []);
+	const [inputText, setInputText] = useState("");
+	let inputHandler = (e) => {
+	  var lowerCase = e.target.value.toLowerCase();
+	  setInputText(lowerCase);
+	};
 
 	return (
 		<div>
@@ -18,17 +20,17 @@ export const Navbar = () => {
 					<img className="logo" src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png?region=0,0,586,254" />
 				</Link>
 				<div className="dropdown favs-button">
-					<button className="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-						<i className="far fa-star"></i>&nbsp;Favorites&nbsp;</button>
+					<button className="inner-favs-button btn text-white dropdown-toggle d-flex" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						<i className="far fa-star"></i>&nbsp;Favorites&nbsp;&nbsp;<p className=" favs-counter m-0"><strong>{store.favorites.length}</strong></p></button>
 
 					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 						{(store.favorites && store.favorites.length > 0) ?
 							store.favorites.map((item, index) => (
-								<li key={item}>
-									<a className="dropdown-item d-flex justify-content-between">{item}<i onClick={() => actions.deleteFavorite(index)} className="trash fas fa-trash-alt mt-1 ms-3"></i></a>
-								</li>
+									<li key={item}>
+										<a className="dropdown-item d-flex justify-content-between">{item}<i onClick={() => actions.deleteFavorite(index)} className="trash fas fa-trash-alt mt-1 ms-3"></i></a>
+									</li>
 							))
-						: <li className="text-center">Add Favorite!</li>}
+						: <li className="text-center">Add Favorites Here!</li>}
 					</ul>
 
 				</div>
@@ -55,10 +57,13 @@ export const Navbar = () => {
 				</div>
 			</nav>
 			<div className="search-bar d-flex fs-5">
-				<input type="text" className="form-control input fs-4 text-white" placeholder="Search Databank"/>
+				<input type="text" onChange={inputHandler} className="form-control input fs-4 text-white" placeholder="Search Databank"/>
 				<button className="search-button d-flex" type="button"><i className="fas fa-search"></i> &nbsp;&nbsp;SEARCH</button>
 			</div>
 
 		</div>
 	);
 };
+
+/*<Link to={store.people.includes(item) ? `/charDetails/${index}` : store.planets.includes(item) ? `/planetDetails/${index}` : `/vehicleDetails/${index}`}>
+</Link>*/

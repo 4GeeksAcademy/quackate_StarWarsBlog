@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
 
+import { Context } from "../store/appContext";
+
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.deleteFavorite();
+	}, []);
+
 	return (
 		<div>
 			<nav className="blog-navbar navbar navbar-expand-lg justify-content-between">
@@ -12,11 +20,17 @@ export const Navbar = () => {
 				<div className="dropdown favs-button">
 					<button className="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 						<i className="far fa-star"></i>&nbsp;Favorites&nbsp;</button>
+
 					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-						<li><a className="dropdown-item" href="#">Something</a></li>
-						<li><a className="dropdown-item" href="#">Another action</a></li>
-						<li><a className="dropdown-item" href="#">Something else here</a></li>
+						{(store.favorites && store.favorites.length > 0) ?
+							store.favorites.map((item, index) => (
+								<li key={item}>
+									<a className="dropdown-item d-flex justify-content-between">{item}<i onClick={() => actions.deleteFavorite(index)} className="trash fas fa-trash-alt mt-1 ms-3"></i></a>
+								</li>
+							))
+						: <li className="text-center">Add Favorite!</li>}
 					</ul>
+
 				</div>
 			</nav>
 			<nav className="navbar navbar-expand-lg sub-nav navbar-dark">
@@ -28,13 +42,13 @@ export const Navbar = () => {
 					<div className="collapse navbar-collapse justify-content-around" id="navbarNavDropdown">
 						<ul className="navbar-nav">
 							<li className="nav-item subnav-item mx-5">
-								<a className="nav-link" aria-current="page" href="#">CHARACTERS</a>
+								<a className="nav-link" aria-current="page" href="#characters">CHARACTERS</a>
 							</li>
 							<li className="nav-item subnav-item mx-5">
-								<a className="nav-link" href="#">PLANETS</a>
+								<a className="nav-link" href="#planets">PLANETS</a>
 							</li>
 							<li className="nav-item subnav-item mx-5">
-								<a className="nav-link" href="#">VEHICLES</a>
+								<a className="nav-link" href="#vehicles">VEHICLES</a>
 							</li>
 						</ul>
 					</div>

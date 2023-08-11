@@ -1,26 +1,28 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "../../styles/card.css";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export const CharacterCard = () => {
+import { Context } from "../store/appContext";
+
+export const CharacterCard = (props) => {
+    const { store, actions } = useContext(Context);
+
+    // const [active, setActive] = useState(false);
+
     return (
-        <div>
+        <div className="mx-3">
             <div className="wrapper-card card m-2">
-                <img src="https://via.placeholder.com/640x360" className="card-img-top" alt="Placeholder Image" />
+                <img src={`https://starwars-visualguide.com/assets/img/characters/${props.index}.jpg`} className="card-img-top" alt="Placeholder Image" />
                 <div className="body card-body">
-                    <h3 className="text-white">Character Name</h3>
-                    <div className="card-description text-white">
-                        <p className="card-text m-0">Gender: n/a</p>
-                        <p className="card-text m-0">Hair Color: n/a</p>
-                        <p className="card-text m-0">Eye Color: n/a</p>
-                    </div>
+                    <h3 className="text-white mb-4 fs-4">{props.name}</h3>
                     <div className="buttons d-flex justify-content-between mt-3">
-                    <Link to="details">
-                        <button type="button" className="btn btn-outline-secondary">Learn More!</button>
-                    </Link>
-                        <button type="button" className="btn btn-outline-light"><i className="far fa-heart"></i></button>
+                        <Link to={"charDetails/" + props.index}>
+                            <button type="button" className="btn btn-outline-secondary">Learn More!</button>
+                        </Link>
+                        <button onClick={() => actions.addFavorite(props.name)} type="button" className="btn heart-button btn-outline-light"><i className="far fa-heart"></i></button>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     );

@@ -1,9 +1,60 @@
 .pic-description {
-    border-bottom: solid;
-    border-color: white;
-    padding-bottom: 40px;
+    background-color: rgb(33, 33, 33);
+    margin-bottom: 70px;
+    border-radius: 10px;
 }
 
 .image {
-    width: 670px;
+    width: 500px;
+    height: 530px;
+    object-fit: cover;
+    object-position: 100% 15%;
+    border-right: solid;
+    border-color: rgb(190, 188, 188);
+    border-width: 1.5px;
+}
+
+.vehicle-img {
+    width: 560px;
+    background-color: rgb(45, 45, 45);
+    border-right: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 1.5px;
+}
+
+.planet-image {
+    height: 500px;
+    background-color: rgb(45, 45, 45);
+    border-right: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 1.5px;
+}
+
+.info-div {
+    border-left: solid;
+    padding-left: 50px;
+    border-width: 1px;
+}
+
+.text-description {
+    text-align: left;
+}
+
+.description-paragraph {
+    color: rgb(164, 164, 164);
+}
+
+.description-title {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.info {
+    text-align: left;
+}
+
+.info-title {
+    background-color: black;
+    padding: 3px;
+    border-radius: 5px;
 }

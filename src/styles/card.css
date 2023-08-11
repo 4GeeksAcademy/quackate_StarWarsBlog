@@ -1,5 +1,6 @@
 .wrapper-card {
     border: none;
+    width: 18rem;
 }
 
 h3 {
@@ -8,4 +9,18 @@ h3 {
 
 .body {
     background-color: rgb(33, 33, 33);
+    height: 160px;
+}
+
+.buttons {
+    bottom: 0;
+}
+
+.heart-button {
+    margin-right: 30px;
+}
+
+.planet-img {
+    height: 250px;
+    object-fit: cover;
 }

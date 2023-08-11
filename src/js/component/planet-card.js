@@ -1,23 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/card.css";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-export const PlanetCard = () => {
-	return (
-		<div>
+import { Context } from "../store/appContext";
+
+export const PlanetCard = (props) => {
+    const { store, actions } = useContext(Context);
+
+    return (
+        <div className="mx-3">
             <div className="wrapper-card card m-2">
-                <img src="https://via.placeholder.com/640x360" className="card-img-top" alt="Placeholder Image"/>
-                    <div className="card-body body">
-                    <h3 className="text-white">Planet Name</h3>
-                        <div className="card-description text-white">
-                            <p className="card-text m-0">Population: n/a</p>
-                            <p className="card-text m-0">Terrain: n/a</p>
-                        </div>
-                        <div className="buttons d-flex justify-content-between mt-3">
-                            <button type="button" className="btn btn-outline-secondary">Learn More!</button>
-                            <button type="button" className="btn btn-outline-light"><i className="far fa-heart"></i></button>
-                        </div>
+                <img src={props.index == 1 ? "https://s-media-cache-ak0.pinimg.com/originals/63/10/83/631083a55deb7a03daf66ccbd9235f4b.jpg" : `https://starwars-visualguide.com/assets/img/planets/${props.index}.jpg`} className="planet-img card-img-top" alt="Placeholder Image" />
+                <div className="card-body body">
+                    <h3 className="text-white mb-4 fs-4">{props.name}</h3>
+                    <div className="buttons justify-content-between d-flex mt-3">
+                    <Link to={"planetDetails/" + props.index}>
+                        <button type="button" className="btn btn-outline-secondary">Learn More!</button>
+                    </Link>
+                        <button onClick={() => actions.addFavorite(props.name)} type="button" className="btn btn-outline-light heart-button"><i className="far fa-heart"></i></button>
                     </div>
+                </div>
             </div>
         </div>
-	);
+    );
 };

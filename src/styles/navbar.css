@@ -1,5 +1,6 @@
 .blog-navbar {
-    background-color: black;
+    background-image: url("https://th.bing.com/th/id/R.a97e78abf66a1ae3f4480ffeb8f17cbc?rik=Rdg30pv1vQGY%2fw&riu=http%3a%2f%2fwallpapercave.com%2fwp%2f1I3yb5l.jpg&ehk=%2fYZ2A6GMnR1vf3cM0OtMeRIzu9HDkzUWqFmDW47PIkY%3d&risl=&pid=ImgRaw&r=0");
+    background-position: center 18%;
     border-bottom: solid;
     border-color: rgb(45, 45, 45);
 }
@@ -51,7 +52,7 @@
 }
 
 .input:focus {
-    outline: 0;
+    outline: none;
     background-color: transparent;
     border-color: black;
 }
@@ -61,4 +62,8 @@
     border: none;
     color: white;
     padding-top: 15px;
+}
+
+.trash:hover {
+    color: rgb(255, 79, 48);
 }

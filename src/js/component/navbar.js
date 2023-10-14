@@ -1,17 +1,74 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/navbar.css";
 
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
 
+	/***/
 	const [inputText, setInputText] = useState("");
-	let inputHandler = (e) => {
-	  var lowerCase = e.target.value.toLowerCase();
-	  setInputText(lowerCase);
+	const [showAutocomplete, setShowAutocomplete] = useState(false);
+	const [autocompleteResults, setAutocompleteResults] = useState([]);
+
+	let inputHandler = (text) => {
+		setInputText(text)
+
+		if (text.trim() == "") {
+			setAutocompleteResults([])
+			setShowAutocomplete(false);
+		}
+
+		else {
+			const fetchChar = fetch("https://www.swapi.tech/api/people?");
+			const fetchPlanets = fetch("https://www.swapi.tech/api/planets?")
+			const fetchVehicle = fetch("https://www.swapi.tech/api/vehicles?")
+
+			Promise.all([fetchChar, fetchPlanets, fetchVehicle])
+				.then((responses) =>
+					Promise.all(responses.map((response) => response.json()))
+				)
+				.then(([charData, planetData, vehicleData]) => {
+					const combinedData = [
+						...charData.results.filter((result) =>
+							result.name.toLowerCase().includes(text.toLowerCase())
+						),
+						...planetData.results.filter((result) =>
+							result.name.toLowerCase().includes(text.toLowerCase())
+						),
+						...vehicleData.results.filter((result) =>
+							result.name.toLowerCase().includes(text.toLowerCase())
+						)]
+					setAutocompleteResults(combinedData)
+					console.log(combinedData)
+					setShowAutocomplete(true);
+				})
+				.catch((error) => {
+					console.log("Looks like there was a problem: \n", error);
+				});
+		}
 	};
+
+	const selectedItemType = (item) => {
+		if (item.url && item.url.toLowerCase().includes("people")) {
+			return "charDetails"
+		}
+		else if (item.url && item.url.toLowerCase().includes("planets")) {
+			return "planetDetails"
+		}
+		else return "vehicleDetails"
+	  };
+
+	const handleSelectAutocomplete = (item) => {
+		setInputText(item.name);
+		setShowAutocomplete(false);
+		console.log(`${selectedItemType(item)}/${item.uid}`)
+		navigate(`${selectedItemType(item)}/${item.uid}`);
+	  };
+	/***/
+
 
 	return (
 		<div>
@@ -26,11 +83,13 @@ export const Navbar = () => {
 					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 						{(store.favorites && store.favorites.length > 0) ?
 							store.favorites.map((item, index) => (
+								<Link to={item && item.path ? ("/" + item.path + "/" + item.index) : ""}>
 									<li key={item}>
 										<a className="dropdown-item d-flex justify-content-between">{item}<i onClick={() => actions.deleteFavorite(index)} className="trash fas fa-trash-alt mt-1 ms-3"></i></a>
 									</li>
+								</Link>
 							))
-						: <li className="text-center">Add Favorites Here!</li>}
+							: <li className="text-center">Add Favorites Here!</li>}
 					</ul>
 
 				</div>
@@ -57,13 +116,26 @@ export const Navbar = () => {
 				</div>
 			</nav>
 			<div className="search-bar d-flex fs-5">
-				<input type="text" onChange={inputHandler} className="form-control input fs-4 text-white" placeholder="Search Databank"/>
+				<input type="text" onChange={(e) => inputHandler(e.target.value)} value={inputText} className="form-control input fs-4 text-white" placeholder="Search Databank" />
 				<button className="search-button d-flex" type="button"><i className="fas fa-search"></i> &nbsp;&nbsp;SEARCH</button>
 			</div>
-
+			{showAutocomplete && autocompleteResults.length > 0 && (
+                <ul className="searchbar-list">
+                  {autocompleteResults.map((item, index) => (
+                    <li key={index} onClick={() => handleSelectAutocomplete(item)} >
+                      {item.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
 		</div>
 	);
 };
 
 /*<Link to={store.people.includes(item) ? `/charDetails/${index}` : store.planets.includes(item) ? `/planetDetails/${index}` : `/vehicleDetails/${index}`}>
 </Link>*/
+
+/* I changed props on charCard, changed the links on navbar, and the add favorites too, missing to do the rest of the fetches and add dropdowns */
+
+//{item && item.name ? item.name : ""}
+//{item && item.path ? ("/" + item.path + "/" + item.index) : ""}

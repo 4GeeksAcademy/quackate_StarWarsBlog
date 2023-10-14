@@ -33,7 +33,7 @@
 .search-bar {
     margin: 55px;
     margin-top: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     background-color: rgb(33, 33, 33);
     border-radius: 8px;
     padding: 12px;
@@ -69,6 +69,25 @@
 .search-button:active {
     font-weight: bold;
     font-size: 20.5px;
+}
+
+.searchbar-list {
+    color: rgb(228, 228, 228);
+    margin-left: 55px;
+    background-color: rgb(75, 75, 75);
+    width: 600px;
+    padding: 20px;
+    padding-left: 60px;
+    border-radius: 8px;
+}
+
+.searchbar-list li {
+    padding-bottom: 5px;
+}
+
+.searchbar-list li:hover {
+    font-weight: bold;
+    color: white;
 }
 
 .trash:hover {

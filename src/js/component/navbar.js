@@ -59,14 +59,14 @@ export const Navbar = () => {
 			return "planetDetails"
 		}
 		else return "vehicleDetails"
-	  };
+	};
 
 	const handleSelectAutocomplete = (item) => {
 		setInputText(item.name);
 		setShowAutocomplete(false);
 		console.log(`${selectedItemType(item)}/${item.uid}`)
 		navigate(`${selectedItemType(item)}/${item.uid}`);
-	  };
+	};
 	/***/
 
 
@@ -116,18 +116,21 @@ export const Navbar = () => {
 				</div>
 			</nav>
 			<div className="search-bar d-flex fs-5">
-				<input type="text" onChange={(e) => inputHandler(e.target.value)} value={inputText} className="form-control input fs-4 text-white" placeholder="Search Databank" />
+				<input type="search" onChange={(e) => inputHandler(e.target.value)} value={inputText} className="form-control input fs-4 text-white" placeholder="Search Databank" />
 				<button className="search-button d-flex" type="button"><i className="fas fa-search"></i> &nbsp;&nbsp;SEARCH</button>
 			</div>
-			{showAutocomplete && autocompleteResults.length > 0 && (
-                <ul className="searchbar-list">
-                  {autocompleteResults.map((item, index) => (
-                    <li key={index} onClick={() => handleSelectAutocomplete(item)} >
-                      {item.name}
-                    </li>
-                  ))}
-                </ul>
-              )}
+			<div className="searchbar-results-wrapper">
+				{showAutocomplete && autocompleteResults.length > 0 && (
+					<ul className="searchbar-list p-0 scrollbar">
+						{autocompleteResults.map((item, index) => (
+							<li key={index} className="my-2" onClick={() => handleSelectAutocomplete(item)} >
+								{item.name}
+							</li>
+						))}
+					</ul>
+				)}
+			</div>
+
 		</div>
 	);
 };

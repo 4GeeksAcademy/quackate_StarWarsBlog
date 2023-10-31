@@ -16,6 +16,9 @@
     background-color: black;
     font-weight: bold;
     width: 250px;
+    font-family: "Star wars";
+    border: none;
+    color: rgb(255, 255, 255);
 }
 
 .h-scrollbar {

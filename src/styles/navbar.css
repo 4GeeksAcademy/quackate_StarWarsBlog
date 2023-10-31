@@ -19,7 +19,7 @@
 }
 
 .sub-nav {
-    background-color:rgb(18, 18, 18);
+    background-color:rgba(18, 18, 18, 0.84);
     padding: 15px;
     margin: 0;
 }
@@ -34,7 +34,7 @@
     margin: 55px;
     margin-top: 40px;
     margin-bottom: 20px;
-    background-color: rgb(33, 33, 33);
+    background-color: rgba(33, 33, 33, 0.671);
     border-radius: 8px;
     padding: 12px;
     padding-left: 20px;
@@ -58,7 +58,7 @@
 }
 
 .search-button {
-    background-color: rgb(33, 33, 33);
+    background-color: rgba(33, 33, 33, 0);
     border: none;
     color: white;
     padding-top: 5px;
@@ -79,7 +79,7 @@
 .searchbar-list {
     color: rgb(228, 228, 228);
     margin-left: 55px;
-    background-color: rgb(56, 52, 52);
+    background-color: rgba(56, 52, 52, 0.977);
     max-height: 200px;
     width: 600px;
     overflow-y: scroll;
@@ -146,9 +146,9 @@
 }
 
 .footer {
-    background-color: rgb(18, 18, 18);
-    padding: 5px;
+    background-color: rgba(18, 18, 18, 0.733);
+    padding: 10px;
     border-top: solid;
     border-bottom: solid;
-    border-color: rgb(30, 30, 30);
+    border-color: rgba(30, 30, 30, 0.736);
 }

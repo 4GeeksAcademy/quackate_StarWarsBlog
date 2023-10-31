@@ -12,7 +12,7 @@ export const Home = (props) => {
 
 	return (
 		<div className="main-wrapper mt-5">
-			<div id="characters" className="title text-white mt-5">
+			<div id="characters" className="title mt-5">
 				<h1 className="title-letters">Characters</h1>
 			</div>
 			<div className="d-flex h-scrollbar">
